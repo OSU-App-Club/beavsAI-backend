@@ -34,7 +34,7 @@ npm install
 4. Get the environment variables
 
 Create a `.env` file in the `/config/` directory under `.env.local` and add the following variables:
-```dotenv
+```sh
 PORT=8080
 MONGODB_ACESS=YOUR_MONGODB_ACCESS_STRING
 ```
