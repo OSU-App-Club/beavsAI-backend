@@ -1,4 +1,0 @@
-Create a file `.env.local` in this directory and add the following:
-PORT=INSERT_PORT_HERE
-MONGODB_ACCESS=INSERT_MONGODB_URI_HERE
-
