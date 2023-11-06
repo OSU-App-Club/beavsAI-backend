@@ -37,6 +37,7 @@ Create a `.env` file in the `/config/` directory under `.env.local` and add the 
 ```dotenv
 PORT=8080
 MONGODB_ACESS=YOUR_MONGODB_ACCESS_STRING
+CLERK_SECRET_KEY=your_secret_key
 ```
 *To get the MongoDB access string, direct message @nyumat on the App Development Club Discord!*
 
