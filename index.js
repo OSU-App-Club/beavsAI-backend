@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import express from "express"
 import mongoose from "mongoose"
+import {clerkClient, ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node"
 
 import logger from "./middleware/logger.js"
 
@@ -16,12 +17,17 @@ const MONGODB_ACCESS = process.env.MONGODB_ACCESS;
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/users", userRoutes)
 
-// Hello World
+app.use("/users", ClerkExpressRequireAuth(), userRoutes)
+
 app.get("/", (req, res) => {
     res.send("Hello BeavsAI")
 })
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(401).send('Unauthenticated');
+});
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_ACCESS, {

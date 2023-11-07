@@ -37,8 +37,9 @@ Create a `.env` file in the `/config/` directory under `.env.local` and add the 
 ```dotenv
 PORT=8080
 MONGODB_ACESS=YOUR_MONGODB_ACCESS_STRING
+CLERK_SECRET_KEY=your_secret_key
 ```
-*To get the MongoDB access string, direct message @nyumat on the App Development Club Discord!*
+*To get the MongoDB and Clerk access string, add your email [here](https://docs.google.com/spreadsheets/d/1k-hZtf8MJBvoEdm-5d5xLFii4SdFtl1o7iB8QFz41jk/edit).*
 
 Although, you **can** work locally by using mongosh, MongoDB's shell. 
 

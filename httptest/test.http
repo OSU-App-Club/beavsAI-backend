@@ -1,0 +1,26 @@
+### Test public API
+GET http://localhost:8080
+
+### Get all users
+GET http://localhost:8080/users
+Authorization: Bearer {{token}}
+
+### Get specific user
+GET http://localhost:8080/users/{{id}}
+Authorization: Bearer {{token}}
+
+### Update user name, major, standing
+PUT http://localhost:8080/users/{{id}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Real First Name",
+  "major": "Computer Science",
+  "standing": "Freshman"
+}
+
+### Test delete user
+# Please don't delete the test user
+DELETE http://localhost:8080/users/TESTID
+Authorization: Bearer {{token}}
