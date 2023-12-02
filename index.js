@@ -6,6 +6,7 @@ import {clerkClient, ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node"
 import logger from "./middleware/logger.js"
 
 import userRoutes from "./routes/users.js"
+import messageRoutes from "./routes/messages.js"
 
 dotenv.config({ path: "./config/.env.local" });
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", ClerkExpressRequireAuth(), userRoutes)
+app.use("/messages", ClerkExpressRequireAuth(), messageRoutes)
 
 app.get("/", (req, res) => {
     res.send("Hello BeavsAI")
