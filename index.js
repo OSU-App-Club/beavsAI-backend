@@ -1,12 +1,13 @@
+import cors from "cors"
 import dotenv from "dotenv"
 import express from "express"
 import mongoose from "mongoose"
-import {clerkClient, ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node"
 
 import logger from "./middleware/logger.js"
 
-import userRoutes from "./routes/users.js"
+import chatRoutes from "./routes/chats.js"
 import messageRoutes from "./routes/messages.js"
+import userRoutes from "./routes/users.js"
 
 dotenv.config({ path: "./config/.env.local" });
 
@@ -18,9 +19,12 @@ const MONGODB_ACCESS = process.env.MONGODB_ACCESS;
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
-app.use("/users", ClerkExpressRequireAuth(), userRoutes)
-app.use("/messages", ClerkExpressRequireAuth(), messageRoutes)
+// TODO: Put back Clerk Authentication
+app.use("/users", userRoutes)
+app.use("/messages", messageRoutes)
+app.use("/chat", chatRoutes)
 
 app.get("/", (req, res) => {
     res.send("Hello BeavsAI")
