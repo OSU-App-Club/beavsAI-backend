@@ -1,5 +1,5 @@
-import {Router} from "express";
-import {createMessage, deleteMessage, editMessage, getAllUserMessages, getMessage} from "../lib/message.js";
+import { Router } from "express";
+import {createMessage, deleteMessage, getAllUserMessages, } from "../lib/message.js";
 
 const router = Router();
 
