@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {createMessage, deleteMessage, getAllUserMessages, } from "../lib/message.js";
+import {createMessage, deleteMessage, getAllUserMessages, updateMessage, } from "../lib/message.js";
 
 const router = Router();
 
@@ -66,6 +66,18 @@ router.delete("/:id", async (req, res) => {
     } else {
         await deleteMessage(id);
         return res.status(200).send(`Message ${id} was deleted`);
+    }
+});
+
+router.put("/:id/:courseId", async (req, res) => {
+    const {id, courseId} = req.params;
+    const {question} = req.body;
+
+    const message = await updateMessage(id, question, courseId);
+    if (!message) {
+        return res.status(404).send({ERROR: "Cannot find message"});
+    } else {
+        return res.status(200).json(message);
     }
 });
 
