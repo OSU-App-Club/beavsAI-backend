@@ -21,7 +21,12 @@ const MONGODB_ACCESS = process.env.MONGODB_ACCESS;
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://beavsai.onrender.com",
+    ],
+}));
 
 /*
  * In the future, it will make the most sense 

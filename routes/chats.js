@@ -1,6 +1,8 @@
 import { Router } from "express";
 import {
+    addBotMessageToChat,
     addMessageToChat,
+    createBotMessage,
     createChat,
     createMessage,
     deleteChat,
@@ -11,6 +13,7 @@ import {
     getAllUserMessages,
     getChatById
 } from "../lib/message.js";
+import Message, { Chat } from "../models/Message.js";
 
 const router = Router();
 
@@ -31,9 +34,7 @@ router.post("/", async (req, res) => {
 router.post("/:userId/chats/:chatId/messages", async (req, res) => {
     const { userId, chatId } = req.params;
     const { message, courseId } = req.body;
-    console.log("addMessageToChat", userId, chatId, message, courseId);
     try {
-        console.log("addMessageToChat", userId, chatId, message, courseId)
         const chat = await addMessageToChat(userId, chatId, message, courseId);
         res.status(201).json(chat);
     } catch (error) {
@@ -114,22 +115,14 @@ router.get("/:userId/chats", async (req, res) => {
     }
 });
 
+
 router.post("/response", async (req, res) => {
-    const { userId, chatId, message: data, courseId } = req.body;
+    const { userId, chatId, message, courseId } = req.body;
+    console.log(message);
     try {
-        const aiResponse = await getAIResponse(data.question, courseId);
-        console.log("lul",aiResponse.response);
-        let message = {
-            answer: aiResponse.response,
-            userId: "",
-            question: data.question,
-            chatId: chatId,
-            courseId: courseId,
-            senderType: data.senderType,
-        }
-        const chat = await createMessage(message);
-        console.log("chat", chat);
-        return res.status(201).json(message);
+        const newMessage = await createBotMessage(userId, message, courseId);
+        const chat = await addBotMessageToChat(chatId, newMessage);
+        res.status(201).json(chat);
     } catch (error) {
         console.error(error);
         return res.status(error.status || 500).json({ error: error.message });
