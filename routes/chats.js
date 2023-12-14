@@ -118,7 +118,6 @@ router.get("/:userId/chats", async (req, res) => {
 
 router.post("/response", async (req, res) => {
     const { userId, chatId, message, courseId } = req.body;
-    console.log(message);
     try {
         const newMessage = await createBotMessage(userId, message, courseId);
         const chat = await addBotMessageToChat(chatId, newMessage);

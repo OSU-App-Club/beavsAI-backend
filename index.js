@@ -58,8 +58,8 @@ mongoose.connect(MONGODB_ACCESS, {
 }).then(() => {
     console.log("[BeavsAI-Backend] Successfully connected to MongoDB.")
 }).then(async () => {
-    const { message } = await initCourses();
-    if (message) console.log(message);
+    const status  = await initCourses();
+    if (status) console.log(status.message);
     else console.log("[BeavsAI-Backend] Successfully initialized courses.")
 }).catch((err) => {
     console.log(err)
